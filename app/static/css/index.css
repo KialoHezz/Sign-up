@@ -54,6 +54,22 @@ body {
   width: 70rem;
 }
 
+/* signup */
+.forms{
+  align-items: center;
+  text-align: center;
+  margin-top: 9rem;
+  font-family: 'Germania One', cursive;
+}
+
+.len{
+  width: 100%;
+}
+
+.signup{
+  margin-top: 1rem;
+}
+
 /* footer of body */
 .footer {
     text-align: center;

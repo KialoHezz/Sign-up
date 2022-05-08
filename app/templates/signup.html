@@ -1,6 +1,46 @@
 {% extends "base.html"%}
 {% block displayContent %}
 
-<h1>signup</h1>
+<div class="forms">
+    <form>
+   <div class="signup">
+        <label for="fname">
+        <input  class="form-control len" type="text" name="fname" placeholder="First Name" required>
+    </label>
+   </div>
+    <div class="signup">
+        <label for="sname">
+        <input class="form-control len" type="text" name="sname" placeholder="Second Name" required>
+    </label>
+    </div>
+   <div class="signup">
+        <label for="username">
+        <input class="form-control" type="text" name="username" placeholder="username" required>
+    </label>
+   </div>
+   <div class="signup">
+        <label for="email">
+        <input class="form-control" type="text" name="email" placeholder="email" required>
+    </label>
+   </div>
+
+    <div class="signup">
+        <label for="password">
+        <input  class="form-control" type="text" name="password" placeholder="password" required>
+    </label>
+    </div>
+    <div class="signup">
+        <label for="email">CHOOSE YOUR GENDER:
+        <input type="radio" name="email"  required>Male
+        <input type="radio" name="email"  required>Female
+    </label>
+    </div>
+
+    <div class="button">
+        <button type="submit">Submit</button>
+    </div>
+    
+</form>
+</div>
 
 {% endblock %}
