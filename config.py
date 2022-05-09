@@ -1,8 +1,8 @@
 # from distutils.debug import DEBUG
-
+import os
 
 class config:
-    pass
+    SECRET_KEY=os.environ.get('SECRET_KEY')
 
 class Devconfig(config):
     DEBUG = True

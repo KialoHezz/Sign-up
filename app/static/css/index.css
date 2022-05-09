@@ -70,6 +70,10 @@ body {
   margin-top: 1rem;
 }
 
+.sign{
+  width: 3rem;
+}
+
 /* footer of body */
 .footer {
     text-align: center;

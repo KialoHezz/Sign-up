@@ -1,25 +1,13 @@
-{% extends "base.html"%}
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf%}
+
 {% block displayContent %}
 
-<div class="forms">
-    <div class="signup">
-        <label for="username">
-        <input class="form-control" type="text" name="username" placeholder="username" required>
-    </label>
-   </div>
-   <div class="signup">
-        <label for="email">
-        <input class="form-control" type="text" name="email" placeholder="email" required>
-    </label>
-   </div>
-    <div class="signup">
-        <label for="password">
-        <input  class="form-control" type="text" name="password" placeholder="password" required>
-    </label>
-    </div>
-    <div class="signup">
-        <button type="submit">Submit</button>
-    </div>
+
+<div class="sign">
+    <!-- wtf.quick_form()  used to to render the registeration -->
+    {{wtf.quick_form(Form)}}
 </div>
+
 
 {% endblock %}

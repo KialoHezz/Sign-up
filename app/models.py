@@ -10,7 +10,7 @@ pass db.Model as arqument to connect our class User and allow communication btn 
 class User(db.Model,UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
+    username = db.Column(db.String(100))
     email = db.Column(db.String(100))
     password_secure = db.Column(db.String(50))
 

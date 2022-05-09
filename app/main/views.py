@@ -9,11 +9,5 @@ def index():
 
     return render_template('index.html', title=title)
 
-@main.route('/signup')
-def signup():
-    return render_template('signup.html')
 
 
-@main.route('/signin')
-def signin():
-    return render_template('signin.html')
