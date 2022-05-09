@@ -1,4 +1,6 @@
-from app import create_app
+# imported db instance
+from app import create_app,db
+from app.models import User
 
 # create a instance 
 app = create_app('development')
