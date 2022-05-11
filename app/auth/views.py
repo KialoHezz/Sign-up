@@ -3,7 +3,8 @@ from . import auth
 from ..models import User
 from .. import db
 from .forms import SignupForm,SigninForm
-from flask_login import login_required
+from flask_login import login_user,logout_user,login_required
+from ..email import mail_message
 
 
 @auth.route('/signup', methods=['GET','POST'])
@@ -14,7 +15,9 @@ def signup():
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('signin.html'))
+        mail_message("Welcome to pitches","email/welcome_user",user.email,user=user)
+
+        return redirect(url_for('signin'))
         title = "New Account"
 
     return render_template('signup.html', Form=form)
@@ -38,4 +41,12 @@ def signin():
     return render_template('signin.html',Form=Form,title=title)
 
 
-        
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("main.index")) 
+
+
+
+    

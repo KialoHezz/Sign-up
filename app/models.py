@@ -1,18 +1,31 @@
-from . import db
-from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
-from . import login_manager
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from . import db, login_manager
 
 # Authentication of user object
 '''
 pass db.Model as arqument to connect our class User and allow communication btn class and db
 '''
+# decorate that is acallback function to handle User
+# function that queries a database and get the user with id
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+    
 class User(db.Model,UserMixin):
     __tablename__ = 'users'
+    
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100))
-    email = db.Column(db.String(100))
-    password_secure = db.Column(db.String(50))
+    username = db.Column(db.String(200), unique=True)
+    email = db.Column(db.String(200))
+    password_secure = db.Column(db.String(300))
+    
+    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
+    
+
+    def __repr__(self):
+        return f'User {self.username} {self.email} {self.password_secure}'
 
 
     @property
@@ -23,15 +36,11 @@ class User(db.Model,UserMixin):
     def password(self,password):
         self.password_secure = generate_password_hash(password)
 
+
     def verify_password(self,password):
         return check_password_hash(self.password_secure, password)
 
-    def __repr__(self):
-        '''
-        __repr___ make easy to debug our application
-        '''
-        return f'User {self.name} {self.email} {self.password}'
-
+   
 
 class Comment:
     '''
@@ -42,10 +51,20 @@ class Comment:
         self.name = name
         self.description = description
 
-# decorate that is acallback function to handle User
-@login_manager.user_loader
-# function that queries a database and get the user with id
-def load_user(user_id):
-    return User.query.get(int(user_id))
 
+class Role(db.Model,UserMixin):
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), unique=True)
+
+    # lazy dynamic 
+    users = db.relationship('User',backref = 'role',lazy="dynamic")
+
+
+    def __repr__(self):
+        '''
+        __repr___ make easy to debug our application
+        '''
+        return f'Role {self.title}'
 

@@ -1,9 +1,8 @@
-import email
-from unicodedata import name
 from wsgiref.validate import validator
 from flask_wtf import FlaskForm
 from wtforms import Form, BooleanField, StringField, PasswordField, validators,SubmitField
 from ..models import User
+import email_validator
 
 
 class SignupForm(FlaskForm):
