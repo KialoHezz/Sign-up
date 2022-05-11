@@ -22,7 +22,7 @@ def profile(username):
     if user is None:
         abort(404)
 
-    return render_template('profile.html',username=user)
+    return render_template('profile/profile.html',user=user)
 
 @main.route('/users/<username>/update/pic', methods=['POST'])
 def update_pic(username):

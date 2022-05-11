@@ -1,18 +1,22 @@
-<div class="col-md-4">
-    {% if user.profile_pic_path %}
+{% extends "base.html"%}
+{% block content %}
+<!-- displaying username -->
+<h3>{{user.username | capitalize }}</h3>
+<!-- displaying user bio -->
+{% if user.bio %}
+<p>{{user.bio}}</p>
+{% else %}
+<p>
+  {{user.username | capitalize }} has no bio
+</p>
+{% endif %}
 
-    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+<!-- displaying picture -->
+{% if user.profile_pic_path %}
+<img src="{{url_for('static', filename=profile_pic_path)}}" alt="img-thumbnail">
+{%else%}
+<p>No profile picture</p>
 
-    {%else%}
-    <p>No profile picture</p>
+{% endif %}
 
-    {% endif %}
-
-        {% if user == current_user %}
-    <form  action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype = "multipart/form-data">
-
-      <input type="file"  name="photo" class="form-control" required>
-      <input type="submit">
-    </form>
-      {% endif %}
-  </div>
+{% endblock %}
