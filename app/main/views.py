@@ -3,6 +3,9 @@ from . import main
 from .. import db,photos
 from flask_login import login_required
 from flask import render_template,request,redirect,abort
+from .forms import UpdateProfile
+from .. import db
+
 
 
 
@@ -35,3 +38,27 @@ def update_pic(username):
         db.session.commit()
 
     return redirect(url_for('main.profile.html',username=username))
+
+
+
+
+@main.route('/users/<username>/update', methods=['GET','POST'])
+# @login_required
+def update_profile(username):
+    user = User.query.filter(username=username).first()
+
+    if user is None:
+        abort(404)
+
+    form = updateProfile()
+
+    if form.validate_on_submit():
+        user.bio =form.bio.data_files
+
+        db.session.add(user)
+        db.session.commit()
+
+
+        return redirect(url_for('.profile',username=user.username))
+
+    return render_template('profile/update.html',form=form)

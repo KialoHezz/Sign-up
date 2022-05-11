@@ -1,5 +1,8 @@
 {% extends "base.html"%}
 {% block content %}
+{% if user == current_user %}
+    <a href="{{url_for('main.update_profile',username=user.username)}}">Edit profile</a>
+{% endif %}
 <!-- displaying username -->
 <h3>{{user.username | capitalize }}</h3>
 <!-- displaying user bio -->
