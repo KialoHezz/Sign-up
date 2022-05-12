@@ -5,6 +5,7 @@ from flask_login import login_required
 from flask import render_template,request,redirect,abort
 from .forms import UpdateProfile
 from .. import db
+from app.models import User
 
 
 
@@ -20,7 +21,7 @@ def index():
 @main.route('/users/<username>')
 @login_required
 def profile(username):
-    user = User.query.filter(username=username).first()
+    user = User.query.filter_by(username=username).first()
 
     if user is None:
         abort(404)

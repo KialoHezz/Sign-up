@@ -15,9 +15,9 @@ def signup():
         db.session.add(user)
         db.session.commit()
 
-        mail_message("Welcome to pitches","email/welcome_user",user.email,user=user)
-
-        return redirect(url_for('signin'))
+        # mail_message("Welcome to pitches","email/welcome_user",user.email,user=user)
+       
+        return redirect(url_for('auth.signin'))
         title = "New Account"
 
     return render_template('signup.html', Form=form)
@@ -30,7 +30,7 @@ def signin():
     if Form.validate_on_submit():
         user = User.query.filter_by(email=Form.email.data).first()
         if user != None and user.verify_password(Form.password.data):
-            signin_user(user, Form.remember.data)
+            login_user(user, Form.remember.data)
 
             return redirect(request.args.get('next') or url_for('main.index'))
 
